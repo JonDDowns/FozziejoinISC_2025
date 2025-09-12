@@ -1,10 +1,10 @@
 ---
 title: "Proposal Title"
 author:
-  - name: Annie Easley
+  - name: Jon Downs
     orcid: 5555-5555-5555-5555
     affiliations:
-      - "Lewis Research Center, National Aeronautics and Space Administration"
+      - "Goose Data Science and Engineering, LLC"
 
 date: today
 date-format: iso

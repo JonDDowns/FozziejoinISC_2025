@@ -12,13 +12,22 @@ for the next section - the proposed solution!
 
 It is important to cover:
 
- - [ ] What the problem is
- - [ ] Who it affects
- - [ ] Why is it a problem
- - [ ] What will solving the problem enable (why should it be solved)
- - [ ] Brief summary of existing work and previous attempts (e.g., relevant R packages)
- - [ ] If proposing changes to R itself: letter of support from R Core member
+ - [X] What the problem is
+ - [X] Who it affects
+ - [X] Why is it a problem
+ - [X] What will solving the problem enable (why should it be solved)
+ - [X] Brief summary of existing work and previous attempts (e.g., relevant R packages)
 -->
 ```
+Approximate string matching plays a vital role in data integration and entity resolution workflows, especially when working with personal identifiers such as names and dates of birth.
+In R, the [@fuzzyjoin] package is widely used for this purpose, leveraging the [@stringdist] package to compute string similarity metrics.
+As of August 2025, [@fuzzyjoin] remains actively used, with 9,103 downloads from CRAN during that month ([@cranlogs]).
+While many of its reverse dependencies focus on domain-specific joins (e.g., genomic or spatial data), its core approximate string matching utilities are foundational to a wide range of tasks — and are the primary target of this proposal.
 
-An example in-text citation [@wickham2016].
+While [@stringdist] is highly optimized, it is not tailored for join operations.
+It computes all pairwise distances across the Cartesian product of two datasets, even though most comparisons are discarded by a user-defined threshold.
+This results in substantial and unnecessary memory allocation, making string distance joins one of the most expensive steps in real-world pipelines.
+
+Other packages such as [@zoomerjoin] have explored performance improvements using probabilistic methods like Locality Sensitive Hashing (LSH).
+However, these approaches are limited in scope and introduce trade-offs in accuracy and algorithm support.
+Thus, [@zoomerjoin] may be less suitable for applications that require deterministic behavior or support for a broader range of string distance metrics.

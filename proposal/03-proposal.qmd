@@ -7,6 +7,7 @@ how will you recover from them?
 This is where the proposal should be outlined.
 -->
 
+
 ## Overview
 <!--
 At a high-level address what your proposal is and how it will address
@@ -16,6 +17,25 @@ section.
 
 Include concrete actions you will take and estimated timeline.
 -->
+To address the performance limitations of [@fuzzyjoin]'s string distance joins, we propose a new R package: `fozziejoin`.
+Designed for speed and scalability, `fozziejoin` currently implements all string distance algorithms supported by fuzzyjoin except `soundex`, and consistently outperforms it in benchmark tests — with speedups exceeding 100× for algorithms such as Hamming distance.
+
+Benchmarks are based on [@fuzzyjoin]’s motivating example: matching common misspellings in Wikipedia articles against the English dictionary from [@qdapDictionaries].
+The benchmark scripts and results are publicly available in the project GitHub repository.
+
+Much of the codebase is already aligned with CRAN submission requirements, including an MIT license and adherence to R packaging standards.
+
+The project will proceed through the following milestones:
+
+- By January 15, 2026: Implement `soundex` as a string distance algorithm, add a `semi` join type, and finalize core functionality for all supported string distance algorithms.
+
+- By February 15, 2026: Align function signatures and output structures with [@fuzzyjoin]< to support drop-in compatibility.
+
+- By April 15, 2026: Complete and polish package documentation, including vignettes and installation guidance for Linux users.
+
+- By May 31, 2026: Submit the package to CRAN and follow up with feedback as necessary to achieve distribution.
+
+By solving this performance bottleneck, `fozziejoin` will enable scalable approximate joins in R, with direct applications in public health, social science, and government analytics.
 
 ## Detail
 <!--
@@ -30,21 +50,63 @@ Depending on project type the detail section should include:
 <!--
 What is the smallest thing you can build that delivers value to your users?
 -->
+The minimum viable product will be publishing the `fozziejoin` package to CRAN.
+The initial release will include the `stringdist_join` family of functions, comprehensive documentation, an example dataset, a usage vignette, and a testing suite.
+
+To achieve the milestone of aligning output structure and function definitions, the project team has identified the following tasks:
+
+- `by` argument behavior: replicate the behavior of the internal `common_by` function from the [@fuzzyjoin] package. Namely, default to the intersection of column names between left and right datasets if `by = NULL`, supporting partially-named list entries, and allowing specification of via the `c()` function.
+- Add case sensitivity control via the `ignore_case` argument
+- Return a `tibble` type if the [@tibble] package is available; otherwise, default to a base `data.frame`
+- Output column naming conventions: Modify suffix behavior so that `.x` and `.y` are only appended when both datasets share the same column names rather than applying them universally
+
+This list is not exhaustive.
+For example, `fozziejoin` currently lacks support for byte-based string distances, a feature available in [@fuzzyjoin] via integration with the [@stringdist] package.
+Additional differences—whether known or discovered—will be addressed iteratively, guided by community feedback and practical use cases.
 
 ### Architecture
 
 <!--
 What does the high-level architecture look like?
 -->
+The initial product will have a set of string distance join modeled after their equivalent [@fuzzyjoin] counterparts:
+
+- `stringdist_join`
+
+- `stringdist_inner_join`
+
+- `stringdist_left_join`
+
+- `stringdist_right_join`
+
+- `stringdist_full_join`
+
+- `stringdist_semi_join`
+
+- `stringdist_anti_join`
+
+The project will be structured as a typical [@rextendr]-enabled package.
 
 ### Assumptions
 
 <!--
 What assumptions are you making that, if proven false, would invalidate the project?
 -->
+The first assumption is that the performance improvements offered by `fozziejoin` will justify its increased installation requirements.
+If this proves false, adoption may be limited.
+The second assumption is that existing alternatives, such as [@zoomerjoin], are not a direct substitute for functionality and flexibility offered by [@fuzzyjoin].
+If this were incorrect, `fozziejoin` may offer redundant capabilities.
 
 ### External dependencies
 
 <!--
 What external dependencies does the project have (e.g. libraries, services, other projects, etc.)?
 -->
+
+Installing `fozziejoin` requires R version 4.2 or greater and the base `stats` package. Additional packages are suggested for development, benchmarking, and testing workflows.
+
+Future versions will suggest [@tibble] to support returning results as tibbles.
+
+Due to the use of [@rextendr], Linux users installing from source must have a Rust toolchain available, including `cargo`, `rustc`, and the `xz` compression library. While CRAN typically provides binaries for Windows and macOS, Linux users may need to install these components manually unless precompiled binaries are available for their distribution.
+
+These requirements will be clearly documented in the README and other package materials. Developers contributing to the project will also need the [@rextendr] package.

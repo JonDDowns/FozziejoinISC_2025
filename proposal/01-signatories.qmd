@@ -10,23 +10,17 @@ are proposed.
 -->
 
 ## Project team
-<!--
-Who are the people responsible for actually delivering the project if
-the proposal gets accepted and are already signed up and rearing to
-go? Briefly describe all participants and the skills they will bring
-to the project.
--->
+The project is currently led by the proposer, who is responsible for all development, testing, documentation, and publication.
+Work will be conducted through a personal LLC, which will serve as the fiscal entity for receiving and managing grant funds.
+While this is the proposer’s first open-source R package, they bring extensive experience developing proprietary developer tools for public sector applications.
 
 ## Contributors
-<!--
-Who are the people who have actively helped with this proposal but
-won't necessarily be on the core project team later?
--->
+No formal contributors are listed at this stage.
+However, the project is designed to be modular and well-documented to facilitate future collaboration and community contributions.
+A Contributor Code of Conduct will be included as part of the finalized documentation to support an open and welcoming development environment.
+The documentation will make clear that the proposer welcomes feedback, issue reports, and contributions via GitHub.
 
 ## Consulted
-<!--
-Who has been given the opportunity to provide feedback on the
-proposal? This should include any R Consortium & ISC members who the
-proposal has been discussed with.
--->
-
+During the preparation of this proposal, the proposer reached out to Hadley Wickham, an R Consortium member, who responded that the proposed approach “sounds like a good plan.”
+He also noted that `fozziejoin` and [@fuzzyjoin] should remain separate projects due to differing installation requirements.
+The code repository has been shared with the extendR Discord community, where it received positive feedback and interest from other developers.
