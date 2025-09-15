@@ -1,8 +1,7 @@
 ---
-title: "Proposal Title"
+title: "fozziejoin: High-Performance String Distance Joins in R"
 author:
   - name: Jon Downs
-    orcid: 5555-5555-5555-5555
     affiliations:
       - "Goose Data Science and Engineering, LLC"
 
@@ -17,11 +16,6 @@ format:
       - right=1.25in
 bibliography: references.bib
 ---
-
-# 🚧🚧🚧 UNDER CONSTRUCTION 🚧🚧🚧
-
-This repository is currently being revisited.
-An update will be released in early September 2025.
 
 {{< include proposal/00-exec-summary.qmd >}}
 

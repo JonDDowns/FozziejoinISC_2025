@@ -10,12 +10,10 @@ important because projects need to get up and running quickly.
  - [X] Licence decisions
  - [X] Reporting framework
 -->
-The MIT license has already been selected for the project.
-A Contributor Code of Conduct based on the Contributor Covenant will be formally adopted to support an open and welcoming development environment.
-
-The project repository is publicly hosted on GitHub and includes benchmark scripts, results, and development notes.
-A GitHub Discussions tab will be used for community engagement and feedback.
-Issue tracking and milestone tracking will serve as the reporting framework, with monthly progress updates and quarterly summaries shared with ISC reviewers.
+The project uses the MIT license and is hosted on GitHub.
+The Contributor Covenant will be adopted and GitHub Discussions will support
+collaboration and feedback. Monthly updates and quarterly summaries will be
+provided for ISC reviewers.
 
 ## Technical delivery
 <!--
@@ -25,18 +23,16 @@ provide at least a high-level description of the implementation.
 Including target dates is really important as you need to be committed
 and the ISC need to have a means of tracking delivery
 -->
-The project will proceed through the following milestones, spaced across a 6-7 month development window:
+Development will span 8–9 months beginning Nov/Dec 2025, organized into four
+milestones:
 
-- By January 15, 2026: Implement `soundex` as a string distance algorithm, add a `semi` join type, and finalize core functionality for all supported string distance algorithms.
+- By February 15, 2026: Add the `soundex` algorithm and `semi` join type.
 
-- By February 15, 2026: Align function signatures and output structures with fuzzyjoin to support drop-in compatibility.
+- By April 15, 2026: Align function signatures and output structures with `fuzzyjoin`.
 
-- By April 15, 2026: Complete and polish package documentation, including vignettes and installation guidance for Linux users.
+- By May 15, 2026: Complete documentation, vignettes, and source install guidance.
 
-- By May 31, 2026: Submit the package to CRAN and follow up with feedback as necessary to achieve distribution.
-
-The minimum viable product will include the `stringdist_join` family of functions, documentation, example dataset, usage vignette, and testing suite.
-The package will be structured as a [@rextendr]-enabled R package, with Rust used for backend string distance calculations.
+- By July 31, 2026: Submit the package to CRAN and respond to feedback as needed.
 
 ## Other aspects
 
@@ -53,15 +49,11 @@ to be shared quarterly on the R Consortium blog.
  - [X] UseR!
  - [X] ISC meetings
 -->
-The project will be released under the MIT license and hosted on GitHub to ensure broad accessibility and community contribution. Documentation will include installation instructions for all major platforms, with special attention to Linux users installing from source.
-
 To publicize the work, the proposer will:
 
-- Publish an announcement post on the R Consortium blog
+- Share announcements and delivery updates on the R Consortium blog at least quarterly
 
-- Share a delivery update upon CRAN submission
-
-- Promote the project via social media and the extendR Discord community
+- Promote the project via LinkedIn and the extendR Discord community
 
 - Submit a talk proposal to the next UseR! conference
 
@@ -85,15 +77,15 @@ how funds are used for each project separately. If in doubt, please reach
 out to us.
 -->
 
-The proposed budget reflects approximately 110 hours of solo development, documentation, and CRAN preparation, at a rate of \$100/hour.
-This rate is consistent with industry standards for specialized R and Rust development.
-The scope has been carefully defined to ensure high-impact delivery within a modest budget, and milestone-based payouts will ensure accountability and transparency throughout the project.
+The budget covers labor costs for development, documentation, and CRAN prep
+at \$100/hour — a standard rate for specialized R/Rust work.
+The scope is defined for high-impact delivery.
 
-| Milestone                         | Target Date      | Estimated Hours  | Rate (USD/hr)  | Funding Estimate  |
-|-----------------------------------|------------------|------------------|----------------|-------------------|
-| Finalize core functionality       | Jan 15, 2026     | 40 hrs           | \$100          | \$4,000           |
-| Match [@fuzzyjoin] signatures      | Feb 15, 2026     | 25 hrs           | \$100          | \$2,500           |
-| Documentation & vignettes         | Apr 15, 2026     | 25 hrs           | \$100          | \$2,500           |
-| CRAN submission & follow-up       | May 31, 2026     | 20 hrs           | \$100          | \$2,000           |
-| **Total**                         |                  | **110 hrs**      |                | **\$11,000**       |
+| Milestone                         | Target Date      | Estimated Hours  | Funding Estimate  |
+|-----------------------------------|------------------|------------------|-------------------|
+| Finalize core functionality       | Feb 15, 2026     | 40 hrs           | \$4,000           |
+| Match `fuzzyjoin` signatures      | Apr 15, 2026     | 25 hrs           | \$2,500           |
+| Documentation & vignettes         | May 15, 2026     | 25 hrs           | \$2,500           |
+| CRAN acceptance                   | Jul 31, 2026     | 20 hrs           | \$2,000           |
+| **Total**                         |                  | **110 hrs**      | **\$11,000**      |
 

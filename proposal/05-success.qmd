@@ -8,31 +8,17 @@ thorough understanding going in of what the risks are to delivery
 <!--
 What does success look like?
 -->
-Success will be defined as the public release of the `fozziejoin` package on CRAN, with complete documentation, full support for all string distance algorithms (including `soundex`), and reasonable consistency with the [@fuzzyjoin] interface.
-The package must pass CRAN checks on all major platforms and include a usage vignette, example dataset, and testing suite.
-All development will be conducted under the MIT license and hosted on GitHub.
+
+Success is defined as the public release of the minimal viable product on CRAN with all milestones completed.
 
 ## Measuring success
 <!--
 How will we know when success is achieved, what markers can we use
 along the way
 -->
-Progress will be tracked through milestone completion and public deliverables:
-
-- Core functionality finalized (including `soundex`)
-
-- Function signatures aligned with [@fuzzyjoin]
-
-- Documentation and vignettes published
-
-- CRAN submission accepted
-
-- GitHub repository active with issue tracking and community engagement
-
-- Benchmark results demonstrating performance improvements over [@fuzzyjoin]
-
+Progress will be tracked through milestone completion and public deliverables.
 Monthly updates and quarterly summaries will be shared with ISC reviewers.
-Community feedback via GitHub Discussions and social media will also serve as informal indicators of adoption and interest.
+Community feedback via GitHub Discussions and social media will serve as informal indicators of adoption and interest.
 
 ## Future work
 <!--
@@ -40,18 +26,10 @@ How could this be extended / developed in the future by yourself
 and/or the community in general?
 -->
 
-The `fozziejoin` package could be extended in several directions:
+`fozziejoin` could be extended in several directions:
 
-- Support for additional join types from [@fuzzyjoin], such as numeric distance, regex, or geographic joins
+- Additional join types from `fuzzyjoin`, such as numeric distance, regex, or geographic joins
+- Supporting `arrow` and other output modalities
+- Utilize `fuzzyjoin` to create a `RecordLinkage` alternative
 
-- Integration with distributed computing frameworks to handle large-scale joins
-
-- Community contributions to expand algorithm support, improve documentation, or add real-world examples
-
-The project is designed to be modular and extensible, enabling future development by the proposer or the broader R community.
-
-This project will also deepen my experience with open-source package development in R, particularly around Rust integration via [@rextendr].
-An epidemiologist by training, my R and Rust skills are largely self-taught.
-Creating developer tools and teaching programming concepts to others have become some of my favorite career activities.
-I hope to use `fozziejoin` as a platform to become a more active participant in the R systems programming community.
-In particular, I would like to contribute to the `extendr` community, as their work made this project possible.
+The project is modular and extensible, enabling future community-centered development.

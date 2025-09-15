@@ -19,15 +19,19 @@ It is important to cover:
  - [X] Brief summary of existing work and previous attempts (e.g., relevant R packages)
 -->
 ```
-Approximate string matching plays a vital role in data integration and entity resolution workflows, especially when working with personal identifiers such as names and dates of birth.
-In R, the [@fuzzyjoin] package is widely used for this purpose, leveraging the [@stringdist] package to compute string similarity metrics.
-As of August 2025, [@fuzzyjoin] remains actively used, with 9,103 downloads from CRAN during that month ([@cranlogs]).
-While many of its reverse dependencies focus on domain-specific joins (e.g., genomic or spatial data), its core approximate string matching utilities are foundational to a wide range of tasks — and are the primary target of this proposal.
+Approximate string matching is essential for data integration and entity
+resolution in administrative datasets. In R, the `fuzzyjoin` package is widely
+used for this purpose. Download metrics for `fuzzyjoin` show
+9,103 CRAN downloads in August 2025 [@cranlogs].
 
-While [@stringdist] is highly optimized, it is not tailored for join operations.
-It computes all pairwise distances across the Cartesian product of two datasets, even though most comparisons are discarded by a user-defined threshold.
-This results in substantial and unnecessary memory allocation, making string distance joins one of the most expensive steps in real-world pipelines.
+Approximate string matching is facilitated in `fuzzyjoin` via the `stringdist`
+package. This approach is not tailored to the approximate string matching use
+case, causing substantial and avoidable memory allocation. Namely, all pairwise
+string distances are returned as an intermediate result. Most of these will be
+discarded by a user-defined threshold.
 
-Other packages such as [@zoomerjoin] have explored performance improvements using probabilistic methods like Locality Sensitive Hashing (LSH).
-However, these approaches are limited in scope and introduce trade-offs in accuracy and algorithm support.
-Thus, [@zoomerjoin] may be less suitable for applications that require deterministic behavior or support for a broader range of string distance metrics.
+Other packages, such as `zoomerjoin` [@zoomerjoin], offer performant 
+probabilistic methods via Locality Sensitive Hashing (LSH). However, LSH limits
+algorithm choice and result accuracy, so `zoomerjoin` does not fully replace
+`fuzzyjoin`.
+
