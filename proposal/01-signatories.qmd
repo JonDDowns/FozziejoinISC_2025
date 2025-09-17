@@ -22,15 +22,15 @@ Who are the people who have actively helped with this proposal but
 won't necessarily be on the core project team later?
 -->
 
-The project is led by Jon Downs, who will carry out all tasks described in this
-proposal. Jon brings extensive experience developing proprietary tools for
-public sector data science teams. Work will be conducted through a personal
-LLC. A Contributor Covenant–based Code of Conduct and other improvements will
-be developed to facilitate future collaboration and community contributions.
+The project is led by Jon Downs. Jon brings extensive experience developing
+proprietary tools for public sector data science teams. Work will be conducted
+through a personal LLC. A Contributor Covenant–based Code of Conduct and other
+improvements will be developed to facilitate future collaboration and community
+contributions.
 
 ### Consulted
 
 During proposal preparation, Jon consulted Hadley Wickham, who
-responded that the approach “sounds like a good plan.” The code repository has
-also been shared with the extendR Discord community, where it received positive
-feedback and interest.
+responded that the approach “sounds like a good plan.” The proposal and code
+repository have also been shared with the extendR Discord community, where it
+received positive feedback and interest.

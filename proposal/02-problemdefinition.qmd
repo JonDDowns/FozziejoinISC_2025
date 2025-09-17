@@ -19,19 +19,18 @@ It is important to cover:
  - [X] Brief summary of existing work and previous attempts (e.g., relevant R packages)
 -->
 ```
-Approximate string matching is essential for data integration and entity
-resolution in administrative datasets. In R, the `fuzzyjoin` package is widely
-used for this purpose. Download metrics for `fuzzyjoin` show
-9,103 CRAN downloads in August 2025 [@cranlogs].
+**Approximate string matching** is essential for data integration and entity
+resolution in administrative datasets. In R, the **`fuzzyjoin`** package
+[@fuzzyjoin] is widely used for this purpose, with 
+**9,103 CRAN downloads in August 2025** [@cranlogs].
 
-Approximate string matching is facilitated in `fuzzyjoin` via the `stringdist`
-package. This approach is not tailored to the approximate string matching use
-case, causing substantial and avoidable memory allocation. Namely, all pairwise
-string distances are returned as an intermediate result. Most of these will be
-discarded by a user-defined threshold.
+However, `fuzzyjoin` relies on the **`stringdist`** [@stringdist] package, which
+is not optimized for this use case. It returns **all pairwise string distances**
+as an intermediate result—most of which are discarded by a user-defined
+threshold. This creates substantial and avoidable memory allocation.
 
-Other packages, such as `zoomerjoin` [@zoomerjoin], offer performant 
-probabilistic methods via Locality Sensitive Hashing (LSH). However, LSH limits
-algorithm choice and result accuracy, so `zoomerjoin` does not fully replace
-`fuzzyjoin`.
+Other packages, such as **`zoomerjoin`** [@zoomerjoin], offer performant
+probabilistic methods via **Locality Sensitive Hashing (LSH)**. But LSH limits
+algorithm choice and result accuracy, so `zoomerjoin` does 
+**not fully replace** `fuzzyjoin`.
 

@@ -9,7 +9,7 @@ thorough understanding going in of what the risks are to delivery
 What does success look like?
 -->
 
-Success is defined as the public release of the minimal viable product on CRAN with all milestones completed.
+Success is defined as release on CRAN with all milestones completed.
 
 ## Measuring success
 <!--

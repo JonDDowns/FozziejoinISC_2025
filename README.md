@@ -1,26 +1,32 @@
 ## Executive Summary
+<!--
+This section provides a condensed view of the entire proposal, one page long.
+It should be a comprehensive high-level overview that captures the essence of the proposal, including its goals, methods, expected outcomes, deliverables, and budget.
+-->
 
-This proposal requests support for the continued development and publication
-of `fozziejoin`, a performant R package designed as an alternative to the 
-widely used `fuzzyjoin` [@fuzzyjoin] for approximate string matching.
+**Approximate string matching** is essential for record linkage in messy
+datasets, but existing tools like `fuzzyjoin` can be **slow and
+memory-intensive**.
 
-`fozziejoin` currently implements 9 of the 10 string distance algorithms
-supported by `fuzzyjoin`, with consistent improvements in runtime and memory
-usage across Windows and Linux. Benchmarks show speedups exceeding 100× for
-certain algorithms, such as Hamming distance.
+This proposal supports the continued development of **`fozziejoin`**, a
+high-performance R package that delivers **over 100× speedups** for certain
+algorithms by replacing the `stringdist` backend with optimized Rust code.
+Speedups are most pronounced on Linux systems.
 
-These gains stem from a Rust-based backend that bypasses the `stringdist`
-[@stringdist] package, enabling efficient computation tailored to fuzzy
-dataframe joins.
+`fozziejoin` already implements **9 of the 10 string distance algorithms**
+supported by `fuzzyjoin`, with **consistent improvements across platforms**.
 
-This proposal aims to:
+To complete its core functionality and prepare for CRAN submission, this
+project will:
 
-- Implement the `soundex` algorithm and a `semi` join type, completing core functionality
-- Align function signatures and outputs with `fuzzyjoin` for easy migration
-- Finalize documentation, including vignettes
-- Submit the package to CRAN
+- **Add** the `soundex` algorithm and a `semi` join type
+- **Align** function signatures and outputs with `fuzzyjoin` for easy migration
+- **Finalize** documentation, including vignettes
+- **Achieve** CRAN publication
 
-If successful, `fozziejoin` will support scalable record linkage in large
-administrative datasets, with applications in public health, social science,
-and government analytics. The project embraces open development and welcomes
-input from the R community.
+If funded, `fozziejoin` will offer **scalable, open-source tools** for **public
+health**, **social science**, and **government analytics**, with broad utility
+for **large administrative datasets**.
+
+The source code and development history are available at:  
+https://github.com/JonDDowns/fozziejoin/tree/main
