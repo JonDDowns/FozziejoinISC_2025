@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Downs">
-<meta name="dcterms.date" content="2025-09-15">
+<meta name="dcterms.date" content="2025-09-17">
 
 <title>fozziejoin: High-Performance String Distance Joins in R</title>
 <style>
@@ -2219,7 +2219,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025-09-15</p>
+      <p class="date">2025-09-17</p>
     </div>
   </div>
   
@@ -2237,17 +2237,19 @@ vertical-align: -.125em;
 This section provides a condensed view of the entire proposal, one page long.
 It should be a comprehensive high-level overview that captures the essence of the proposal, including its goals, methods, expected outcomes, deliverables, and budget.
 -->
-<p>This proposal requests support for the continued development and publication of <code>fozziejoin</code>, a performant R package designed as an alternative to the widely used <code>fuzzyjoin</code> <span class="citation" data-cites="fuzzyjoin">(<a href="#ref-fuzzyjoin" role="doc-biblioref">Robinson 2020</a>)</span> for approximate string matching.</p>
-<p><code>fozziejoin</code> currently implements 9 of the 10 string distance algorithms supported by <code>fuzzyjoin</code>, with consistent improvements in runtime and memory usage across Windows and Linux. Benchmarks show speedups exceeding 100× for certain algorithms, such as Hamming distance.</p>
-<p>These gains stem from a Rust-based backend that bypasses the <code>stringdist</code> <span class="citation" data-cites="stringdist">(<a href="#ref-stringdist" role="doc-biblioref">Mark van der Loo 2014</a>)</span> package, enabling efficient computation tailored to fuzzy dataframe joins.</p>
-<p>This proposal aims to:</p>
+<p><strong>Approximate string matching</strong> is essential for record linkage in messy datasets, but existing tools like <code>fuzzyjoin</code> can be <strong>slow and memory-intensive</strong>.</p>
+<p>This proposal supports the continued development of <strong><code>fozziejoin</code></strong>, a high-performance R package that delivers <strong>over 100× speedups</strong> for certain algorithms by replacing the <code>stringdist</code> backend with optimized Rust code. Speedups are most pronounced on Linux systems.</p>
+<p><code>fozziejoin</code> already implements <strong>9 of the 10 string distance algorithms</strong> supported by <code>fuzzyjoin</code>, with <strong>consistent improvements across platforms</strong>.</p>
+<p>To complete its core functionality and prepare for CRAN submission, this project will:</p>
 <ul>
-<li>Implement the <code>soundex</code> algorithm and a <code>semi</code> join type, completing core functionality</li>
-<li>Align function signatures and outputs with <code>fuzzyjoin</code> for easy migration</li>
-<li>Finalize documentation, including vignettes</li>
-<li>Submit the package to CRAN</li>
+<li><strong>Add</strong> the <code>soundex</code> algorithm and a <code>semi</code> join type</li>
+<li><strong>Align</strong> function signatures and outputs with <code>fuzzyjoin</code> for easy migration</li>
+<li><strong>Finalize</strong> documentation, including vignettes</li>
+<li><strong>Achieve</strong> CRAN publication</li>
 </ul>
-<p>If successful, <code>fozziejoin</code> will support scalable record linkage in large administrative datasets, with applications in public health, social science, and government analytics. The project embraces open development and welcomes input from the R community.</p>
+<p>If funded, <code>fozziejoin</code> will offer <strong>scalable, open-source tools</strong> for <strong>public health</strong>, <strong>social science</strong>, and <strong>government analytics</strong>, with broad utility for <strong>large administrative datasets</strong>.</p>
+<p>The source code and development history are available at:<br>
+https://github.com/JonDDowns/fozziejoin/tree/main</p>
 </section>
 <section id="signatories" class="level1">
 <h1>Signatories</h1>
@@ -2272,11 +2274,11 @@ to the project.
 Who are the people who have actively helped with this proposal but
 won't necessarily be on the core project team later?
 -->
-<p>The project is led by Jon Downs, who will carry out all tasks described in this proposal. Jon brings extensive experience developing proprietary tools for public sector data science teams. Work will be conducted through a personal LLC. A Contributor Covenant–based Code of Conduct and other improvements will be developed to facilitate future collaboration and community contributions.</p>
+<p>The project is led by Jon Downs. Jon brings extensive experience developing proprietary tools for public sector data science teams. Work will be conducted through a personal LLC. A Contributor Covenant–based Code of Conduct and other improvements will be developed to facilitate future collaboration and community contributions.</p>
 </section>
 <section id="consulted" class="level3">
 <h3 class="anchored" data-anchor-id="consulted">Consulted</h3>
-<p>During proposal preparation, Jon consulted Hadley Wickham, who responded that the approach “sounds like a good plan.” The code repository has also been shared with the extendR Discord community, where it received positive feedback and interest.</p>
+<p>During proposal preparation, Jon consulted Hadley Wickham, who responded that the approach “sounds like a good plan.” The proposal and code repository have also been shared with the extendR Discord community, where it received positive feedback and interest.</p>
 </section>
 </section>
 <section id="the-problem" class="level1">
@@ -2294,9 +2296,9 @@ It is important to cover:
  - [X] What will solving the problem enable (why should it be solved)
  - [X] Brief summary of existing work and previous attempts (e.g., relevant R packages)
 -->
-<p>Approximate string matching is essential for data integration and entity resolution in administrative datasets. In R, the <code>fuzzyjoin</code> package is widely used for this purpose. Download metrics for <code>fuzzyjoin</code> show 9,103 CRAN downloads in August 2025 <span class="citation" data-cites="cranlogs">(<a href="#ref-cranlogs" role="doc-biblioref">Csárdi 2022</a>)</span>.</p>
-<p>Approximate string matching is facilitated in <code>fuzzyjoin</code> via the <code>stringdist</code> package. This approach is not tailored to the approximate string matching use case, causing substantial and avoidable memory allocation. Namely, all pairwise string distances are returned as an intermediate result. Most of these will be discarded by a user-defined threshold.</p>
-<p>Other packages, such as <code>zoomerjoin</code> <span class="citation" data-cites="zoomerjoin">(<a href="#ref-zoomerjoin" role="doc-biblioref">Green 2025</a>)</span>, offer performant probabilistic methods via Locality Sensitive Hashing (LSH). However, LSH limits algorithm choice and result accuracy, so <code>zoomerjoin</code> does not fully replace <code>fuzzyjoin</code>.</p>
+<p><strong>Approximate string matching</strong> is essential for data integration and entity resolution in administrative datasets. In R, the <strong><code>fuzzyjoin</code></strong> package <span class="citation" data-cites="fuzzyjoin">(<a href="#ref-fuzzyjoin" role="doc-biblioref">Robinson 2020</a>)</span> is widely used for this purpose, with <strong>9,103 CRAN downloads in August 2025</strong> <span class="citation" data-cites="cranlogs">(<a href="#ref-cranlogs" role="doc-biblioref">Csárdi 2022</a>)</span>.</p>
+<p>However, <code>fuzzyjoin</code> relies on the <strong><code>stringdist</code></strong> <span class="citation" data-cites="stringdist">(<a href="#ref-stringdist" role="doc-biblioref">Mark van der Loo 2014</a>)</span> package, which is not optimized for this use case. It returns <strong>all pairwise string distances</strong> as an intermediate result—most of which are discarded by a user-defined threshold. This creates substantial and avoidable memory allocation.</p>
+<p>Other packages, such as <strong><code>zoomerjoin</code></strong> <span class="citation" data-cites="zoomerjoin">(<a href="#ref-zoomerjoin" role="doc-biblioref">Green 2025</a>)</span>, offer performant probabilistic methods via <strong>Locality Sensitive Hashing (LSH)</strong>. But LSH limits algorithm choice and result accuracy, so <code>zoomerjoin</code> does <strong>not fully replace</strong> <code>fuzzyjoin</code>.</p>
 </section>
 <section id="the-proposal" class="level1">
 <h1>The proposal</h1>
@@ -2317,9 +2319,15 @@ section.
 
 Include concrete actions you will take and estimated timeline.
 -->
-<p>To address performance limitations in <code>fuzzyjoin</code>’s string distance joins, we propose a new R package: <code>fozziejoin</code>. To date, <code>fozziejoin</code> has implemented 9 of 10 string distance algorithms available in <code>fuzzyjoin</code>. Benchmarks based on <code>fuzzyjoin</code>’s motivating example show consistent performance gains on Windows and Linux. Speedups exceed 100x for cases like Hamming distance.</p>
-<p>These improvements enable scalable approximate joins in R, with applications in public health, social science, and government analytics.</p>
-<p>The codebase is designed with CRAN compliance in mind. This grant aims to replicate <code>fuzzyjoin</code>’s user-friendly interface, develop documentation and supporting materials, and achieve CRAN publication. Development will span December 2025 to July 2026.</p>
+<p>To address performance limitations in <code>fuzzyjoin</code>’s string distance joins, we propose a new R package: <code>fozziejoin</code>. <code>fozziejoin</code> currently implements <strong>9 of 10 string distance algorithms</strong> from <code>fuzzyjoin</code>, with select benchmarks showing 100× speedups on Windows and Linux.</p>
+<p>These improvements enable <strong>scalable approximate joins in R</strong>, with applications in <strong>public health</strong>, <strong>social science</strong>, and <strong>government analytics</strong>.</p>
+<p>The codebase is designed for <strong>CRAN compliance</strong>. This grant will:</p>
+<ul>
+<li>Improve alignment with <code>fuzzyjoin</code>’s interface and functionality</li>
+<li>Develop documentation and supporting materials</li>
+<li>Submit to CRAN</li>
+</ul>
+<p><strong>Timeline:</strong> December 2025 to July 2026</p>
 </section>
 <section id="detail" class="level2">
 <h2 class="anchored" data-anchor-id="detail">Detail</h2>
@@ -2331,32 +2339,38 @@ Depending on project type the detail section should include:
 -->
 <section id="minimum-viable-product" class="level3">
 <h3 class="anchored" data-anchor-id="minimum-viable-product">Minimum Viable Product</h3>
-<!--
-What is the smallest thing you can build that delivers value to your users?
--->
-<p>The minimum viable product will be publishing the <code>fozziejoin</code> package to CRAN. The initial release will include the <code>stringdist_join</code> family of functions, comprehensive documentation, an example dataset, a usage vignette, and a testing suite.</p>
-<p>To align output structure and function definitions with <code>fuzzyjoin</code>, <code>fozziejoin</code> will replicate <code>by</code> argument behavior, add a case sensitivity option, return a <code>tibble</code> when available, and match <code>fuzzyjoin</code>’s output column naming conventions. This list is not exhaustive; additional differences will be addressed iteratively, guided by community feedback and practical use.</p>
+<p>The minimum viable product is a <strong>CRAN-published version of <code>fozziejoin</code></strong>, including:</p>
+<ul>
+<li>The <code>stringdist_join</code> family of functions</li>
+<li>Comprehensive documentation and usage vignette</li>
+<li>An example dataset</li>
+<li>A testing suite</li>
+</ul>
+<p>Interface and output will broadly align with <code>fuzzyjoin</code>, though exact replication is not a goal. Differences and planned adjustments are tracked in the following GitHub issue, and will evolve based on community feedback and practical use:</p>
+<p>https://github.com/JonDDowns/fozziejoin/issues/5</p>
 </section>
 <section id="architecture" class="level3">
 <h3 class="anchored" data-anchor-id="architecture">Architecture</h3>
-<!--
-What does the high-level architecture look like?
--->
-<p>The initial release will include string distance join functions modeled after their <code>fuzzyjoin</code> counterparts: <code>stringdist_join</code>, <code>stringdist_inner_join</code>, <code>stringdist_left_join</code>, <code>stringdist_right_join</code>, <code>stringdist_full_join</code>, <code>stringdist_semi_join</code>, and <code>stringdist_anti_join</code>. The package will follow a standard <code>rextendr</code> structure.</p>
+<p><code>fozziejoin</code> uses Rust via <code>rextendr</code> to accelerate string matching in R.</p>
 </section>
 <section id="assumptions" class="level3">
 <h3 class="anchored" data-anchor-id="assumptions">Assumptions</h3>
 <!--
 What assumptions are you making that, if proven false, would invalidate the project?
 -->
-<p>This project assumes that <code>fozziejoin</code>’s performance gains will justify its installation requirements. If not, adoption may be limited. It also assumes that alternatives like <code>zoomerjoin</code> are not direct substitutes for the flexibility and functionality of <code>fuzzyjoin</code>. If this proves false, <code>fozziejoin</code> may offer redundant capabilities.</p>
+<p>This project assumes:</p>
+<ul>
+<li><code>fozziejoin</code>’s performance gains will justify its installation requirements</li>
+<li>Alternatives like <code>zoomerjoin</code> are not direct substitutes for <code>fuzzyjoin</code>’s flexibility</li>
+</ul>
+<p>If either assumption proves false, adoption may be limited or redundant.</p>
 </section>
 <section id="external-dependencies" class="level3">
 <h3 class="anchored" data-anchor-id="external-dependencies">External dependencies</h3>
 <!--
 What external dependencies does the project have (e.g. libraries, services, other projects, etc.)?
 -->
-<p>Installing <code>fozziejoin</code> requires R 4.2 or higher and the base <code>stats</code> package. Future versions will suggest <code>tibble</code> <span class="citation" data-cites="tibble">(<a href="#ref-tibble" role="doc-biblioref">Müller and Wickham 2023</a>)</span> to support tidy output. Additional packages are recommended for development, benchmarking, and testing. Source installs require <code>cargo</code>, <code>rustc</code>, and the <code>xz</code> decompression utility. Since CRAN provides binaries for Windows and macOS, these requirements mainly affect Linux users and developers.</p>
+<p>Requires R 4.2+, the base <code>stats</code> package, and optionally <code>tibble</code> <span class="citation" data-cites="tibble">(<a href="#ref-tibble" role="doc-biblioref">Müller and Wickham 2023</a>)</span>. Development tools include <code>cargo</code>, <code>rustc</code>, and <code>xz</code>. After CRAN distribution, CRAN binaries will reduce the install burden for Windows and macOS users.</p>
 </section>
 </section>
 </section>
@@ -2373,7 +2387,7 @@ important because projects need to get up and running quickly.
  - [X] Licence decisions
  - [X] Reporting framework
 -->
-<p>The project uses the MIT license and is hosted on GitHub. The Contributor Covenant will be adopted and GitHub Discussions will support collaboration and feedback. Monthly updates and quarterly summaries will be provided for ISC reviewers.</p>
+<p>The project uses the <strong>MIT license</strong> and is hosted on <strong>GitHub</strong>. The <strong>Contributor Covenant</strong> will guide community standards, and <strong>GitHub Discussions</strong> will support collaboration and feedback. <strong>Monthly updates</strong> and <strong>quarterly summaries</strong> will be provided for ISC reviewers.</p>
 </section>
 <section id="technical-delivery" class="level2">
 <h2 class="anchored" data-anchor-id="technical-delivery">Technical delivery</h2>
@@ -2384,13 +2398,37 @@ provide at least a high-level description of the implementation.
 Including target dates is really important as you need to be committed
 and the ISC need to have a means of tracking delivery
 -->
-<p>Development will span 8–9 months beginning Nov/Dec 2025, organized into four milestones:</p>
-<ul>
-<li><p>By February 15, 2026: Add the <code>soundex</code> algorithm and <code>semi</code> join type.</p></li>
-<li><p>By April 15, 2026: Align function signatures and output structures with <code>fuzzyjoin</code>.</p></li>
-<li><p>By May 15, 2026: Complete documentation, vignettes, and source install guidance.</p></li>
-<li><p>By July 31, 2026: Submit the package to CRAN and respond to feedback as needed.</p></li>
-</ul>
+<p>Development will span <strong>8–9 months</strong>, beginning <strong>Nov/Dec 2025</strong>, and organized into four milestones:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 79%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Date</strong></th>
+<th><strong>Milestone</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>February 15, 2026</td>
+<td>Add the <code>soundex</code> algorithm and <code>semi</code> join type</td>
+</tr>
+<tr class="even">
+<td>April 15, 2026</td>
+<td>Align function signatures and output structures with <code>fuzzyjoin</code></td>
+</tr>
+<tr class="odd">
+<td>May 15, 2026</td>
+<td>Complete documentation, vignettes, and source install guidance</td>
+</tr>
+<tr class="even">
+<td>July 31, 2026</td>
+<td>Submit the package to CRAN and respond to feedback as needed</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="other-aspects" class="level2">
 <h2 class="anchored" data-anchor-id="other-aspects">Other aspects</h2>
@@ -2409,10 +2447,10 @@ to be shared quarterly on the R Consortium blog.
 -->
 <p>To publicize the work, the proposer will:</p>
 <ul>
-<li><p>Share announcements and delivery updates on the R Consortium blog at least quarterly</p></li>
-<li><p>Promote the project via LinkedIn and the extendR Discord community</p></li>
-<li><p>Submit a talk proposal to the next UseR! conference</p></li>
-<li><p>Attend ISC meetings as requested to provide updates and receive feedback</p></li>
+<li>Share updates on the <strong>R Consortium blog</strong> (at least quarterly)</li>
+<li>Promote via <strong>LinkedIn</strong> and the <strong>extendR Discord</strong> community</li>
+<li>Submit a talk proposal to the next <strong>UseR!</strong> conference</li>
+<li>Attend <strong>ISC meetings</strong> as requested to provide updates and receive feedback</li>
 </ul>
 </section>
 <section id="budget-funding-plan" class="level2">
@@ -2432,20 +2470,20 @@ to the project and the project period. The ISC reserves the right to vet
 how funds are used for each project separately. If in doubt, please reach
 out to us.
 -->
-<p>The budget covers labor costs for development, documentation, and CRAN prep at $100/hour — a standard rate for specialized R/Rust work. The scope is defined for high-impact delivery.</p>
+<p>The budget covers labor costs for development, documentation, and CRAN prep at <strong>$100/hour</strong> — a standard rate for specialized R/Rust work. The scope is defined for high-impact delivery.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 38%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 21%">
+<col style="width: 42%">
+<col style="width: 24%">
+<col style="width: 16%">
+<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Milestone</th>
-<th>Target Date</th>
-<th>Estimated Hours</th>
-<th>Funding Estimate</th>
+<th><strong>Milestone</strong></th>
+<th><strong>Target Date</strong></th>
+<th><strong>Hours</strong></th>
+<th><strong>Funding</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -2494,7 +2532,7 @@ thorough understanding going in of what the risks are to delivery
 <!--
 What does success look like?
 -->
-<p>Success is defined as the public release of the minimal viable product on CRAN with all milestones completed.</p>
+<p>Success is defined as release on CRAN with all milestones completed.</p>
 </section>
 <section id="measuring-success" class="level2">
 <h2 class="anchored" data-anchor-id="measuring-success">Measuring success</h2>
